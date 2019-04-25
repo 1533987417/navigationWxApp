@@ -1,0 +1,13 @@
+{
+  "description": "video applet for users",
+  "setting": {
+    "urlCheck": true,
+    "es6": false,
+    "postcss": false,
+    "minified": false
+  },
+  "compileType": "miniprogram",
+  "appid": "wxb79f1c37818b2ba6",
+  "projectname": "Busapplet",
+  "miniprogramRoot": "./dist"
+}

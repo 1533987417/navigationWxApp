@@ -1,0 +1,217 @@
+<template>
+  <view>
+    <view class="navtab">
+      <scroll-view scroll-x="true" class="scroll-contain navtab-contain">
+        <block wx:for="{{groups}}" wx:for-index="index" wx:for-item="item" wx:key="Id">
+          <view class="navtab-item" @tap="toUrl" data-bind="{{item}}">{{item.CategoryName}}</view>
+        </block>
+      </scroll-view>
+    </view>
+    <view style="margin-top:80rpx">
+      <swiper class="swiper-card" indicator-dots="{{true}}" autoplay>
+        <block class="swiper-container" wx:for="{{bannerList}}" wx:for-index="index" wx:for-item="item" wx:key="id">
+          <swiper-item class="displex-center" data-id="{{item.Id}}" @tap="toUrl1">
+            <view class="swiper-card-item">
+              <!-- width="355" height="150"  -->
+              <image src="{{item.ImageUrl}}" />
+            </view>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+    <view>
+      <cardself :title="area1" :size="num1" :pageData.sync="ExcellentCollageList"></cardself>
+    </view>
+    <view>
+      <cardself1 :title="area2" :size="num2" :pageData.sync="DaKaCollageList"></cardself1>
+    </view>
+
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+import cardself from "../components/card"
+import cardservice from "../components/cardservice"
+import toast from "./../utils/toast"
+import config from "./../utils/config"
+import helper from "./../utils/helper"
+import api from "./../utils/api"
+import request from "./../utils/request"
+import db from "./../utils/db"
+
+
+export default class Index extends wepy.page {
+  config = {
+    navigationBarTitleText: '首页',
+    "usingComponents": {
+      "van-button": "../components/vant/button/index",
+      "van-card": "../components/vant/card/index",
+      "van-rate": "../components/vant/rate/index",
+      "van-toast": "../components/vant/toast/index"
+    }
+  }
+
+  components = {
+    cardself: cardself,
+    cardself1: cardself,
+    cardservice: cardservice
+  }
+
+  data = {
+    bannerList: [],
+    groups: [],
+    area2: "大咖课",
+    area1: "精品专栏",
+    num1: 4,
+    num2: 6,
+    ExcellentCollageList:[{},{},{},{}],
+    DaKaCollageList:[{},{},{},{}]
+  }
+
+  computed = {
+
+  }
+
+  methods = {
+    toUrl(e) {
+      console.log(e.currentTarget.dataset.bind)
+      let detail = e.currentTarget.dataset.bind;
+      wepy.navigateTo({
+        url: 'collageList?Id=' + detail.Id + '&categoryName=' + detail.CategoryName
+      })
+    },
+    toUrl1(e) {
+      wepy.navigateTo({
+        url: 'detail?id=' + e.currentTarget.dataset.id
+      })
+    },
+    test1() {
+      helper.toOtherPage("redirect", {
+        route: "index"
+      })
+    }
+  }
+
+  events = {
+    // 'index-emit': (...args) => {
+    //   let $event = args[args.length - 1]
+    //   console.log(`${this.$name} receive ${$event.name} from ${$event.source.$name}`)
+    // }
+  }
+  onShareAppMessage(e) {
+    /*return {
+      title: ""this.collegeDetailEntity.Title"",
+      desc: "发现一款很棒的课程，点进来看看吧",
+      path: "pages/index" 
+       
+      // imageUrl: "qqq"
+    }*/
+  }
+
+  onLoad() {
+    var that = this;
+
+    console.log("进入了index")
+
+
+
+    
+
+    request.httpGetOpenid(function(data) {
+     request.httpPostJY(api.service.getCollageCategoryList, { "GroupName": "首页导航" }, (isOk, data) => {
+      console.log(data)
+      if (data.Code == "200") {
+        that.groups = data.Data;
+        that.$apply();
+      }
+    });
+     request.httpGetJY(api.service.getHomeBannerInfo, {}, (isOk, data) => {
+      let result = data;
+      if (result.Code == "200") {
+        console.log("xxxxsssss", result.Data)
+        that.bannerList = result.BannerList;
+        that.ExcellentCollageList=result.ExcellentCollageList;
+        that.DaKaCollageList=result.DaKaCollageList;
+        that.$apply()
+      }
+    })
+
+   })
+    // let self = this
+    // this.$parent.getUserInfo(function (userInfo) {
+    //   if (userInfo) {
+    //     self.userInfo = userInfo
+    //   }
+    //   self.normalTitle = '标题已被修改'
+
+    //   self.setTimeoutTitle = '标题三秒后会被修?
+    //   setTimeout(() => {
+    //     self.setTimeoutTitle = '到三秒了'
+    //     self.$apply()
+    //   }, 3000)
+
+    //   self.$apply()
+    // })
+  }
+}
+
+</script>
+<style lang="less">
+page {
+  background: #eee;
+}
+
+.swiper-card {
+  width: 100%;
+  height: 320rpx;
+  margin-top: -10rpx;
+}
+
+.swiper-container {
+  width: 100%;
+  height: 100%;
+
+}
+
+.swiper-card-item {
+  width: 95%;
+  height: 300rpx;
+  border-radius: 15rpx;
+
+  image {
+    width: 100%;
+    height: 100%;
+    border-radius: 15rpx;
+  }
+}
+
+.navtab {
+  width: 100%;
+  position: fixed;
+  z-index: 1000;
+  top: 0%;
+
+}
+
+.navtab-contain {
+  width: 100%;
+  height: 60rpx;
+  background-color: rgba(255, 255, 255, 1);
+  padding-bottom:10rpx;
+}
+
+.navtab-item {
+  width: 200rpx;
+  height: 100%;
+  color: #000;
+  display: inline-block;
+  font-size: 90%;
+  text-align: center;
+  line-height: 60rpx;
+  font-weight: bold;
+  padding-top: 5rpx;
+  padding-bottom: 5rpx;
+  margin-bottom: 8rpx;
+}
+
+</style>
