@@ -5,11 +5,6 @@ import helper from "./helper"
 import toast from "./toast"
 import api from "./api"
 
-const baseInfo = {
-  appid: "wx020ed5b1ec4361c1",
-  secret: "8e69a523943daff4a253d6a57a7c0cc1",
-  grant_type: "authorization_code"
-}
 
 let defineOpts = {
   showLoading: "true",

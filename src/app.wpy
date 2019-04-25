@@ -8,7 +8,10 @@ import request from "./utils/request"
 
 export default class extends wepy.app {
   config = {
-    pages: ['pages/index',
+    pages: ['pages/my',
+    'pages/index',
+    
+    'pages/route',
     ],
     window: {
       backgroundTextStyle: 'light',
@@ -39,6 +42,12 @@ export default class extends wepy.app {
         "text": "首页"
       },
       {
+        "pagePath": "pages/route",
+        "iconPath": "image/home_tab_wd.png",
+        "selectedIconPath": "image/home_tab_wd_down.png",
+        "text": "路线"
+      },
+      {
         "pagePath": "pages/my",
         "iconPath": "image/home_tab_wd.png",
         "selectedIconPath": "image/home_tab_wd_down.png",
@@ -46,94 +55,69 @@ export default class extends wepy.app {
       }
       ]
     },
-    "plugins": {
+    
+    "permission": {
+      "scope.userLocation": {
+        "desc": "你的位置信息将用于小程序位置接口的效果展示"
+      }
+    }
+    
+  }
+    /*"plugins": {
       "wxparserPlugin": {
         "version": "0.2.1",
         "provider": "wx9d4d4ffa781ff3ac"
       }
+      */
 
-    },
-  }
-  globalData = {
-    userInfo: {},
-    deviceInfo: {}
-  }
 
-  constructor() {
-    super()
-    this.use('requestfix')
-  }
 
-  onLaunch() {
-
-    var that = this
-    wx.getSystemInfo({
-      success(res) {
-        console.log(res)
-        that.globalData.deviceInfo = res
+      globalData = {
+        userInfo: {},
+        deviceInfo: {}
       }
 
-    })
-    /*helper.checkAuth("userInfo",function(isOk,data){
-      if(!isOk) {
-        helper.toOtherPage("redirect")
-      }else{
-        wx.getUserInfo({
-          success(res){
-            let data = res.userInfo
-            that.globalData.userInfo = data
-            
-            helper.toOtherPage("index")
-            console.log("这里>>",that.globalData.userInfo) 
-            // that.imgurl = data.avatarUrl
-            // that.nickname = data.nickName
-            // that.$apply()
-          },
-          fail(){
-            // helper.toOtherPage("index")
+      constructor() {
+        super()
+        this.use('requestfix')
+      }
+
+      onLaunch() {
+
+        var that = this
+        wx.getSystemInfo({
+          success(res) {
+            console.log(res)
+            that.globalData.deviceInfo = res
           }
-        })
-      }
-    })
-    db.Set("token","123321")
-  }
 
-  getUserInfo(cb) {
-    const that = this
-    if (this.globalData.userInfo) {
-      return this.globalData.userInfo
+        });
+        wx.authorize({scope:"userLocation",
+         success(res){
+
+         }})
+      }
+
+
     }
-    wepy.getUserInfo({
-      success(res) {
-        that.globalData.userInfo = res.userInfo
-        cb && cb(res.userInfo)
-      }
-    })*/
-    // that.globalData.userInfo=db.Get("userInfo");
-    request.httpGetOpenid(function(data) {
-      that.globalData.userInfo = db.Get("userInfo");
-      console.log(that.globalData.userInfo)
-    })
-  }
-}
 
-</script>
-<style lang="less">
-.container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  box-sizing: border-box;
-}
+    </script>
+    <style lang="less">
+    .container {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      box-sizing: border-box;
+    }
 
 
 
-.displex-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+    .displex-center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-</style>
+    </style>

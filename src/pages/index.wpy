@@ -1,217 +1,230 @@
 <template>
-  <view>
-    <view class="navtab">
-      <scroll-view scroll-x="true" class="scroll-contain navtab-contain">
-        <block wx:for="{{groups}}" wx:for-index="index" wx:for-item="item" wx:key="Id">
-          <view class="navtab-item" @tap="toUrl" data-bind="{{item}}">{{item.CategoryName}}</view>
-        </block>
-      </scroll-view>
-    </view>
-    <view style="margin-top:80rpx">
-      <swiper class="swiper-card" indicator-dots="{{true}}" autoplay>
-        <block class="swiper-container" wx:for="{{bannerList}}" wx:for-index="index" wx:for-item="item" wx:key="id">
-          <swiper-item class="displex-center" data-id="{{item.Id}}" @tap="toUrl1">
-            <view class="swiper-card-item">
-              <!-- width="355" height="150"  -->
-              <image src="{{item.ImageUrl}}" />
+  <view class="container" style="height:{{screenHeight}}px">
+    <view class="body">
+      <view class="content" wx:if="{{!show}}">
+        <image class="head" src="/image/gantan.png"></image>
+        <view class="text">您未开通电子卡功能</view>
+        <view class="text" style="margin-bottom:50rpx" >开启后出示二维码即可扫码乘车</view>
+        <view class="foot-text" @tap="open">立即开通</view>
+      </view>
+      <view class="content-two" wx:if="{{show}}">
+        <view class="text" style="margin-top:10rpx">北京地铁乘车码</view>
+        <view class="text-min">将二维码对准闸机扫码口扫码进展</view>
+        <image class="bus-img" src="/image/erweima.jpg"></image>
+        <view class="text-min" style="display:flex;text-align:center;margin-left:28%">
+          <view>乘车码自动</view><span style="color:#00CC00FF">刷新</span>
+          <image class="icon" src="/image/webwxgetmsgimg (7).jpg"></image></view>
+          <view class="fenge"></view>
+          <view class="pay-way" @tap="click">支付方式</view>
+          <view class="footer">
+            <image class="pay-icon" src="{{url}}"></image>
+            <view>
+
+              <view class="pay-desc">五月累计优惠<span style="margin-left:50rpx">8折</span></view>
+              <view style="display:flex;width:180%">
+                <view class="bar"></view>
+                <view class="bar2"></view>
+              </view>
+              
             </view>
-          </swiper-item>
-        </block>
-      </swiper>
-    </view>
-    <view>
-      <cardself :title="area1" :size="num1" :pageData.sync="ExcellentCollageList"></cardself>
-    </view>
-    <view>
-      <cardself1 :title="area2" :size="num2" :pageData.sync="DaKaCollageList"></cardself1>
-    </view>
+            
+          </view>
+        </view>
+      </view>
 
-  </view>
-</template>
-<script>
-import wepy from 'wepy'
-import cardself from "../components/card"
-import cardservice from "../components/cardservice"
-import toast from "./../utils/toast"
-import config from "./../utils/config"
-import helper from "./../utils/helper"
-import api from "./../utils/api"
-import request from "./../utils/request"
-import db from "./../utils/db"
+    </view>
+    <van-action-sheet show="{{ showAction }}" title="选择支付方式" @tap="choose">
+      <view data-hi="/image/webwxgetmsgimg (3).jpg" style="display:flex;margin-top:10rpx"><image class="pay-icon-select" src="/image/webwxgetmsgimg (3).jpg"></image><span class="pay-select">支付宝</span></view>
+      <view data-hi="/image/webwxgetmsgimg (2).jpg" style="display:flex;margin-top:10rpx"><image class="pay-icon-select" src="/image/webwxgetmsgimg (2).jpg"></image><span class="pay-select">微信</span></view>
+      <view data-hi="/image/webwxgetmsgimg (1).jpg" style="display:flex;margin-top:10rpx"><image class="pay-icon-select" src="/image/webwxgetmsgimg (1).jpg"></image><span class="pay-select">银联</span></view>
+
+      
+      
+      
+    </van-action-sheet>
+  </template>
+  <script>
+  import wepy from 'wepy'
+
+  import db from "./../utils/db"
 
 
-export default class Index extends wepy.page {
-  config = {
-    navigationBarTitleText: '首页',
-    "usingComponents": {
-      "van-button": "../components/vant/button/index",
-      "van-card": "../components/vant/card/index",
-      "van-rate": "../components/vant/rate/index",
-      "van-toast": "../components/vant/toast/index"
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '首页',
+      "usingComponents": {
+        "van-button": "../components/vant/button/index",
+        "van-card": "../components/vant/card/index",
+        "van-rate": "../components/vant/rate/index",
+        "van-toast": "../components/vant/toast/index",
+        "van-action-sheet": "../components/vant/action-sheet/index"
+      }
     }
-  }
 
-  components = {
-    cardself: cardself,
-    cardself1: cardself,
-    cardservice: cardservice
-  }
+    components = {
 
-  data = {
-    bannerList: [],
-    groups: [],
-    area2: "大咖课",
-    area1: "精品专栏",
-    num1: 4,
-    num2: 6,
-    ExcellentCollageList:[{},{},{},{}],
-    DaKaCollageList:[{},{},{},{}]
-  }
-
-  computed = {
-
-  }
-
-  methods = {
-    toUrl(e) {
-      console.log(e.currentTarget.dataset.bind)
-      let detail = e.currentTarget.dataset.bind;
-      wepy.navigateTo({
-        url: 'collageList?Id=' + detail.Id + '&categoryName=' + detail.CategoryName
-      })
-    },
-    toUrl1(e) {
-      wepy.navigateTo({
-        url: 'detail?id=' + e.currentTarget.dataset.id
-      })
-    },
-    test1() {
-      helper.toOtherPage("redirect", {
-        route: "index"
-      })
     }
-  }
 
-  events = {
+    data = {
+      screenHeight:"",
+      show:false,
+      showAction:false,
+      url:"/image/webwxgetmsgimg (3).jpg"
+    }
+
+    computed = {
+
+    }
+
+    methods = {
+      open(){
+        console.log("click");
+        this.show=true;
+        this.$apply()
+      },
+      click(){
+        this.showAction=true;
+        this.$apply()
+      },
+      choose(e){
+        console.log(e);
+        this.url=e.target.dataset.hi;
+        this.showAction=false;
+        this.$apply()
+      }
+    }
+
+    events = {
     // 'index-emit': (...args) => {
     //   let $event = args[args.length - 1]
     //   console.log(`${this.$name} receive ${$event.name} from ${$event.source.$name}`)
     // }
   }
-  onShareAppMessage(e) {
-    /*return {
-      title: ""this.collegeDetailEntity.Title"",
-      desc: "发现一款很棒的课程，点进来看看吧",
-      path: "pages/index" 
-       
-      // imageUrl: "qqq"
-    }*/
-  }
+
 
   onLoad() {
     var that = this;
 
     console.log("进入了index")
-
-
-
-    
-
-    request.httpGetOpenid(function(data) {
-     request.httpPostJY(api.service.getCollageCategoryList, { "GroupName": "首页导航" }, (isOk, data) => {
-      console.log(data)
-      if (data.Code == "200") {
-        that.groups = data.Data;
-        that.$apply();
-      }
-    });
-     request.httpGetJY(api.service.getHomeBannerInfo, {}, (isOk, data) => {
-      let result = data;
-      if (result.Code == "200") {
-        console.log("xxxxsssss", result.Data)
-        that.bannerList = result.BannerList;
-        that.ExcellentCollageList=result.ExcellentCollageList;
-        that.DaKaCollageList=result.DaKaCollageList;
-        that.$apply()
-      }
-    })
-
+    this.screenHeight=this.$parent.globalData.deviceInfo.windowHeight;
+    this.$apply()
+    console.log(this.$parent.globalData.deviceInfo)
+    wx.getLocation({
+      success(res) {
+       console.log(res)
+     }
    })
-    // let self = this
-    // this.$parent.getUserInfo(function (userInfo) {
-    //   if (userInfo) {
-    //     self.userInfo = userInfo
-    //   }
-    //   self.normalTitle = '标题已被修改'
-
-    //   self.setTimeoutTitle = '标题三秒后会被修?
-    //   setTimeout(() => {
-    //     self.setTimeoutTitle = '到三秒了'
-    //     self.$apply()
-    //   }, 3000)
-
-    //   self.$apply()
-    // })
+    
   }
 }
 
 </script>
-<style lang="less">
-page {
-  background: #eee;
-}
-
-.swiper-card {
-  width: 100%;
-  height: 320rpx;
-  margin-top: -10rpx;
-}
-
-.swiper-container {
-  width: 100%;
-  height: 100%;
+<style lang="css">
+.container{
+  background-color: #4FCE8BFF;
 
 }
-
-.swiper-card-item {
-  width: 95%;
-  height: 300rpx;
-  border-radius: 15rpx;
-
-  image {
-    width: 100%;
-    height: 100%;
-    border-radius: 15rpx;
-  }
-}
-
-.navtab {
-  width: 100%;
-  position: fixed;
-  z-index: 1000;
-  top: 0%;
+.body{
+  background-color: #FFFFFFFF;
+  height: 800rpx;
+  width: 80%;
+  margin-top: 120rpx;
+  border-radius: 10rpx;
 
 }
+.head{
+  width: 150rpx;
+  height: 150rpx;
+  text-align: center;
+  transform:translate(150%, 10%);
+  margin-bottom: 10rpx
 
-.navtab-contain {
-  width: 100%;
-  height: 60rpx;
-  background-color: rgba(255, 255, 255, 1);
-  padding-bottom:10rpx;
 }
+.text{
+  text-align: center;
+  margin-bottom: 10rpx
 
-.navtab-item {
-  width: 200rpx;
-  height: 100%;
-  color: #000;
-  display: inline-block;
+}
+.foot-text{
+  border:1px solid #0099FFFF;
+  color:#0099FFFF;
+  text-align:center;
+  display:inline;
+  margin-left:38%;
+  margin-top: 20rpx;
+  padding-left:5rpx;
+  padding-right: 5rpx;
+
+}
+.text-min{
+  color: #999999FF;
   font-size: 90%;
   text-align: center;
-  line-height: 60rpx;
-  font-weight: bold;
-  padding-top: 5rpx;
-  padding-bottom: 5rpx;
-  margin-bottom: 8rpx;
 }
+.bus-img{
+  width: 400rpx;
+  height: 400rpx;
+  margin-left:17%;
+  margin-top: 10rpx;
+}
+.icon{
+  width: 60rpx;
+  height: 60rpx;
+  margin-top: -10rpx
+}
+.fenge{
+  height: 1rpx;
+  background-color: #999999FF;
+  width:95%;
+  margin-left: 8rpx
+}
+.footer{
+  margin-top: 20rpx;
+  margin-left:20rpx;
+  display: flex
+}
+.pay-icon{
+  width:80rpx;
+  height:80rpx;
 
+}
+.pay-desc{
+  font-size: 60%;
+  margin-left: 10rpx
+}
+.bar{
+  background-color: #3399FFFF;
+  height: 10rpx;
+  margin-top: 20rpx;
+  margin-left: 10rpx;
+  border-radius: 5rpx;
+  width:140%;
+
+}
+.bar2{
+  background-color: #F2F2F2FF;
+  height: 10rpx;
+  margin-top: 20rpx;
+  border-radius: 5rpx;
+  width: 120%
+}
+.pay-way{
+  border:1px solid #909090FF;
+  border-radius: 20rpx;
+  font-size: 60%;
+  margin-left: 5%;
+  margin-top: 5rpx;
+  display: inline;
+
+}
+.pay-icon-select{
+  width:80rpx;
+  height:80rpx;
+  margin-left: 30rpx
+}
+.pay-select{
+  margin-left: 50rpx;
+  margin-top:10rpx;
+
+}
 </style>

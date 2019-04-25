@@ -1,2 +1,2 @@
-# mpApplet
+# BusWxapp
 about小程序

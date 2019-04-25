@@ -1,0 +1,60 @@
+<template>
+  <view>
+
+    路线
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+
+import db from "./../utils/db"
+
+
+export default class Index extends wepy.page {
+  config = {
+    navigationBarTitleText: '首页',
+    "usingComponents": {
+      "van-button": "../components/vant/button/index",
+      "van-card": "../components/vant/card/index",
+      "van-rate": "../components/vant/rate/index",
+      "van-toast": "../components/vant/toast/index"
+    }
+  }
+
+  components = {
+
+  }
+
+  data = {
+
+  }
+
+  computed = {
+
+  }
+
+  methods = {
+
+  }
+
+  events = {
+    // 'index-emit': (...args) => {
+    //   let $event = args[args.length - 1]
+    //   console.log(`${this.$name} receive ${$event.name} from ${$event.source.$name}`)
+    // }
+  }
+
+  onLoad() {
+    var that = this;
+
+    console.log("进入了index")
+
+
+
+  }
+}
+
+</script>
+<style lang="css">
+
+</style>
