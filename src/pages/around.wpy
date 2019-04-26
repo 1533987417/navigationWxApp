@@ -1,0 +1,129 @@
+<template>
+  <view>
+    <van-cell title="周边优惠" value="查看更多" />
+    <van-cell  >
+      <view slot="title">
+        <view style="display:flex">
+          <image style="width:40rpx;height:40rpx" src="/image/定位.png"></image>
+          <view>离我最近</view>
+        </view>
+      </view>
+    </van-cell>
+    <van-cell  >
+      <block wx:for="{{list}}" wx:key="id">
+        <view slot="title" style="display:flex;margin-bottom:4rpx;">
+          <image style="width:180rpx;height:150rpx" src="{{item.url}}"></image>
+          <view style="margin-left:20rpx">
+            <view class="title">{{item.title}}</view>
+            <view class="subtitle">{{item.subtitle}}</view>
+            <view class="desc">{{item.desc}}</view>
+          </view>
+          <view class="get" data-item="{{index}}" @tap="click">
+            {{item.isget?"已领取":"立即领取"}}
+          </view>
+        </view>
+        <view class="fenge"></view>
+      </block>
+    </van-cell>
+    <van-cell title="合作景点套票" value="查看更多" />
+    <van-cell  >
+      <block wx:for="{{listtwo}}" wx:key="id">
+        <view slot="title" style="display:flex;margin-bottom:4rpx;">
+
+          <view style="margin-left:20rpx">
+            <view class="title">{{item.title}}</view>
+            <view class="subtitle">{{item.subtitle}}<span style="text-decoration:line-through;color:#707070;font-size: 24rpx">￥{{item.submoney}}</span></view>
+            <view class="desc">{{item.desc}}</view>
+          </view><image style="width:250rpx;height:75px;margin-left:180rpx;" src="{{item.url}}"></image>
+        </view>
+      </block>
+    </van-cell>
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+
+import db from "./../utils/db"
+
+
+export default class Index extends wepy.page {
+  config = {
+    navigationBarTitleText: '周边推荐',
+    "usingComponents": {
+      "van-button": "../components/vant/button/index",
+      "van-card": "../components/vant/card/index",
+      "van-rate": "../components/vant/rate/index",
+      "van-toast": "../components/vant/toast/index",
+      "van-cell": "../components/vant/cell/index",
+      "van-cell-group": "../components/vant/cell-group/index"
+    }
+  }
+
+  components = {
+
+  }
+
+  data = {
+    list:[{url:"https://ss3.baidu.com/-rVXeDTa2gU2pMbgoY3K/it/u=1366933569,3644610352&fm=202&mola=new&crop=v1",title:"57号烤肉全场抵扣券",subtitle:"9.5折",desc:"57号烤肉 4.2km",isget:false},{url:"https://ss3.baidu.com/-rVXeDTa2gU2pMbgoY3K/it/u=1366933569,3644610352&fm=202&mola=new&crop=v1",title:"57号烤肉全场抵扣券",subtitle:"9.5折",desc:"57号烤肉 4.2km",isget:false}],
+    listtwo:[{url:"https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1962610270,1087353442&fm=85&app=52&f=JPEG?w=121&h=75&s=F7220EE154504FCC5EBC6D5E030040F3",title:"十三陵神路",subtitle:"￥106.00",submoney:"40.00",desc:"·票务368天后过期"},
+    {url:"https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1962610270,1087353442&fm=85&app=52&f=JPEG?w=121&h=75&s=F7220EE154504FCC5EBC6D5E030040F3",title:"十三陵神路",subtitle:"￥106.00",submoney:"40.00",desc:"·票务368天后过期"},
+    {url:"https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1962610270,1087353442&fm=85&app=52&f=JPEG?w=121&h=75&s=F7220EE154504FCC5EBC6D5E030040F3",title:"十三陵神路",subtitle:"￥106.00",submoney:"40.00",desc:"·票务368天后过期"}]
+  }
+
+  computed = {
+
+  }
+
+  methods = {
+    click(e){
+      console.log(e.target.dataset.item)
+      this.list[e.target.dataset.item].isget=true;
+      this.$apply()
+    }
+  }
+
+  events = {
+    // 'index-emit': (...args) => {
+    //   let $event = args[args.length - 1]
+    //   console.log(`${this.$name} receive ${$event.name} from ${$event.source.$name}`)
+    // }
+  }
+
+  onLoad() {
+    var that = this;
+
+    console.log("进入了index")
+
+
+
+  }
+}
+
+</script>
+<style lang="css">
+.title{
+  font-weight: bold;
+  font-size: 110%
+}
+.subtitle{
+  color: #E47D73FF;
+  font-weight: bold;
+}
+.desc{
+  color: #BFBFBFFF;
+  font-size: 80%
+}
+.get{
+ border:1px solid #7FC7AFFF;
+ float:right;
+
+ height:50rpx;
+ margin-left:80rpx;
+ padding-left:5rpx;
+ padding-right:5rpx;
+
+}
+.fenge{height: 1rpx;
+  width: 100%;
+  background-color: #F5F5F5FF}
+  </style>

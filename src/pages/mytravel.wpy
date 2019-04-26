@@ -1,0 +1,141 @@
+<template>
+  <view class="bcg" style="height:{{screenHeight}}px">
+   <view class="contain">
+
+    <van-cell-group>
+      <block wx:for="{{list}}" wx:key="id">
+        <van-cell  value="已完成"  is-link>
+          <view slot="title" style="width:380rpx;">
+            <view class="in-out" style="display:flex">
+             <view class="in-icon">进</view>
+             <view class="text">{{item.in}} - </view>
+             <view class="out-icon">出</view>
+             <view class="text">{{item.out}}</view>
+           </view>
+           <view style="font-size:90%;color:#969696FF">
+            {{item.date}}
+          </view>
+        </view>
+      </van-cell>
+      <van-cell  label="描述信息" border="{{ false }}" >
+        <view slot="value" class="date-text">
+          行程总额￥{{item.money}} | 实付 <span style="font-size:150%;color:#000000FF">￥{{item.money}}</span>
+        </view>
+      </van-cell>
+      <view class="fenge"></view>
+    </block>
+  </van-cell-group>
+
+</view>
+</view>
+</template>
+<script>
+import wepy from 'wepy'
+
+import db from "./../utils/db"
+
+
+export default class Index extends wepy.page {
+  config = {
+    navigationBarTitleText: '我的行程',
+    "usingComponents": {
+      "van-button": "../components/vant/button/index",
+      "van-card": "../components/vant/card/index",
+      "van-rate": "../components/vant/rate/index",
+      "van-toast": "../components/vant/toast/index",
+      "van-cell": "../components/vant/cell/index",
+      "van-cell-group": "../components/vant/cell-group/index"
+    }
+  }
+
+  components = {
+
+  }
+
+  data = {
+    screenHeight:"",
+    list:[{id:1,in:"望京南",out:"后沙谷",date:"3月22日 20:29/20:54",money:"4.00"},{id:2,in:"望京南",out:"后沙谷",date:"3月22日 20:29/20:54",money:"4.00"},
+    {id:3,in:"望京南",out:"后沙谷",date:"3月22日 20:29/20:54",money:"4.00"},{id:4,in:"望京南",out:"后沙谷",date:"3月22日 20:29/20:54",money:"4.00"},
+    {id:5,in:"望京南",out:"后沙谷",date:"3月22日 20:29/20:54",money:"4.00"},{id:6,in:"望京南",out:"后沙谷",date:"3月22日 20:29/20:54",money:"4.00"}]
+  }
+
+  computed = {
+
+  }
+
+  methods = {
+
+  }
+
+  events = {
+    // 'index-emit': (...args) => {
+    //   let $event = args[args.length - 1]
+    //   console.log(`${this.$name} receive ${$event.name} from ${$event.source.$name}`)
+    // }
+  }
+
+  onLoad() {
+    var that = this;
+
+    console.log("进入了index")
+
+    this.screenHeight=this.$parent.globalData.deviceInfo.windowHeight;
+    this.$apply()
+
+  }
+}
+
+</script>
+<style lang="css">
+.bcg{
+  background-color: #F5F5F5FF;
+
+}
+.contain{
+  padding-top: 10rpx
+}
+.in-out{
+  display: flex
+}
+.in-icon{
+ border:1px solid #7FC7AFFF;
+ font-size:80%;
+ border-radius:100rpx;
+ padding-left:8rpx;
+ padding-right:8rpx;
+ display:inline-block;
+ height:45rpx;
+ width:25rpx;
+ color:  #7FC7AFFF
+
+
+
+}
+.out-icon{
+ border:1px solid #D08587FF;
+ font-size:80%;
+ border-radius:100rpx;
+ padding-left:8rpx;
+ padding-right:8rpx;
+ display:inline-block;
+ height:45rpx;
+ width:25rpx;
+ color:  #D08587FF
+
+
+
+}
+.text{
+  margin-left: 5rpx;
+}
+.date-text{
+  font-size: 90%;
+  color: #969696FF
+}
+.fenge{
+  height: 10rpx;
+  width: 100%;
+  background-color: #F5F5F5FF
+}
+
+</style>

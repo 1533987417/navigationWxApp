@@ -8,10 +8,16 @@ import request from "./utils/request"
 
 export default class extends wepy.app {
   config = {
-    pages: ['pages/my',
-    'pages/index',
+    pages: ['pages/route','pages/index',
     
-    'pages/route',
+    'pages/around','pages/my',
+    'pages/shop',
+    
+    
+    'pages/mytravel',
+    
+    
+    
     ],
     window: {
       backgroundTextStyle: 'light',
@@ -30,6 +36,7 @@ export default class extends wepy.app {
       "van-field": "../components/vant/field/index",
       "van-dialog": "../components/vant/dialog/index",
       "van-popup": "../components/vant/popup/index",
+
     },
     tabBar: {
       "color": "#a9b7b7",

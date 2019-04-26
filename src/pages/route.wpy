@@ -1,8 +1,59 @@
 <template>
-  <view>
+  <view class="container" style="height:{{screenHeight}}px">
 
-    路线
+   <view class="body">
+
+     <view >
+       <view class="address1">我的位置</view>
+       <image class="to-image" src="/image/webwxgetmsgimg (6).jpg"></image>
+       <view class="address2">{{to}}</view>
+
+
+     </view>
+
+     <view style="display:flex;justify-content:center;margin-top:50rpx">
+      <view style="margin-right:30rpx;margin-top:50rpx;">
+        <view >崔各庄站</view>
+        <view class="line"></view>
+      </view>
+      <view>
+        <view style="font-size:70%;text-align:center">0.1km(离我最近)</view>
+        <view class="middle">
+          望京东站
+        </view>
+        <image src="/image/箭头.png" style="height:30rpx;width:30rpx;margin-left:33%;"></image>
+      </view>
+
+      <view style="margin-left:30rpx;margin-top:50rpx;">
+        <view style="color:#FF0000FF">望京站</view>
+        <view class="line"></view>
+      </view>
+    </view>
+    <view style="display:flex;justify-content:center">
+      <view class="minuate">3分钟到站</view>
+      <image class="jian-tou" src="/image/箭头左.png"></image>
+      <view>下次列车</view>
+      <image class="jian-tou" src="/image/箭头右.png"></image>
+      <view class="minuate">1分钟到站</view>
+
+    </view>
+
+    <view >
+      <movable-view direction="vertical">
+        <image class="train" src="/image/火车.png"></image>
+        <image class="train" src="/image/火车.png"></image>
+        <image class="train" src="/image/火车.png"></image>
+        <image class="train" src="/image/火车.png"></image>
+        <image class="train" src="/image/火车.png"></image>
+        <image class="train" src="/image/火车.png"></image> <image class="train" src="/image/火车.png"></image>
+        <image class="train" src="/image/火车.png"></image>
+        <image class="train" src="/image/火车.png"></image> <image class="train" src="/image/火车.png"></image>
+        <image class="train" src="/image/火车.png"></image>
+        <image class="train" src="/image/火车.png"></image>
+      </movable-view>
+    </view>
   </view>
+</view>
 </template>
 <script>
 import wepy from 'wepy'
@@ -12,7 +63,7 @@ import db from "./../utils/db"
 
 export default class Index extends wepy.page {
   config = {
-    navigationBarTitleText: '首页',
+    navigationBarTitleText: '路线规划',
     "usingComponents": {
       "van-button": "../components/vant/button/index",
       "van-card": "../components/vant/card/index",
@@ -26,7 +77,8 @@ export default class Index extends wepy.page {
   }
 
   data = {
-
+    screenHeight:"",
+    to:"望京站"
   }
 
   computed = {
@@ -49,12 +101,81 @@ export default class Index extends wepy.page {
 
     console.log("进入了index")
 
-
+    this.screenHeight=this.$parent.globalData.deviceInfo.windowHeight;
+    this.$apply()
 
   }
 }
 
 </script>
 <style lang="css">
+.container{
+  background-color: #4FCE8BFF;
 
+}
+.body{
+  background-color:#FFFFFFFF;
+  height:900rpx;
+  width:90%;
+  margin-top:120rpx;
+  border-radius:10rpx;
+
+
+}
+.address1{
+  border:1px solid #000000FF;
+  float:left;
+  margin-top:50rpx;
+  margin-left:30rpx;
+  margin-right:20rpx
+}
+.address2{
+  border:1px solid #000000FF;
+
+  float:right;
+  margin-top:50rpx;
+  margin-right:30rpx;
+
+}
+.to-image{
+  width:120rpx;
+  height:80rpx;
+  float:center;
+  justify-content:center;
+  margin-left:15%;
+  margin-top:35rpx;
+
+
+}
+.line{
+  height:1rpx;
+  background-color:#050505FF;
+  margin-top:20rpx
+}
+.middle{
+  background-color:#FF99FFFF;
+  height:80rpx;
+  width:180rpx;
+  border-radius:10rpx;
+  padding-top:15rpx;
+  text-align: center;
+
+
+
+}
+.minuate{
+  color: #FF9900FF;
+  font-size: 70%
+}
+.jian-tou{
+ width:50rpx;
+ height:50rpx;
+ margin-left:10rpx;
+ margin-right:10rpx;
+
+}
+.train{
+  width:100rpx;
+  height: 100rpx
+}
 </style>

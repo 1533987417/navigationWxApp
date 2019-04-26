@@ -18,17 +18,51 @@
         </view>
       </view>
     </view>
-    <view class="bottom-contain">
+    <view class="bottom-contain" @tap="click">
       <view>
         <image src="/image/}H4)[~0N]B_9$I_7$`KS0FO.png" class="ad" mode="aspectFill"></image>
+      </view>
+      <view class="content">
+        <view class="content-one" data-url="mytravel">
+          <image class="image" src="/image/webwxgetmsgimg (12).jpg"></image>
+          <view class="desc">地铁路线</view>
+        </view>
+        <view class="content-one" data-url="">
+          <image data-url="" class="image" src="/image/webwxgetmsgimg (11).jpg"></image>
+          <view data-url="" class="desc">到站提醒</view>
+        </view>
+      </view>
+
+      <view class="content" style="margin-top:30rpx;">
+        <view class="content-one" data-url="mytravel">
+          <image data-url="mytravel" class="image" src="/image/webwxgetmsgimg (19).jpg"></image>
+          <view data-url="mytravel" class="desc">我的行程</view>
+        </view>
+        <view class="content-one" data-url="mytravel">
+          <image class="image" src="/image/webwxgetmsgimg (8).jpg"></image>
+          <view class="desc">地铁视频</view>
+        </view>
+
+
+      </view>
+      <view class="content" style="margin-top:50rpx;">
+        <view class="content-one" data-url="around">
+          <image data-url="around" class="image" src="/image/webwxgetmsgimg (9).jpg"></image>
+          <view data-url="around" class="desc">周边推荐</view>
+        </view>
+        <view class="content-one" data-url="shop"> 
+          <image data-url="shop" class="image" src="/image/webwxgetmsgimg (10).jpg"></image>
+          <view data-url="shop" class="desc">文创商品</view>
+        </view>
       </view>
     </view>
 
   </view>
+  <van-toast id="van-toast" />
 </template>
 <script>
 import wepy from 'wepy'
-
+import Toast from '../components/vant/toast/toast';
 import db from "./../utils/db"
 
 
@@ -56,70 +90,94 @@ export default class Index extends wepy.page {
   }
 
   methods = {
+    click(e){
+      console.log(e);
+      if(e.target.dataset.url){
+        var url=e.target.dataset.url;
+        wepy.navigateTo({
+          url: url
+        })}else{
+          Toast.fail('该功能暂未开通');
+        }
+      }
+    }
+
+
+
+
+
+    onLoad() {
+      this.screenHeight=this.$parent.globalData.deviceInfo.windowHeight;
+      this.$apply()
+
+    }
+  }
+  </script>
+  <style lang="css">
+  .container{
+    background-color: #4FCE8BFF;
+    justify-content:center !important
 
   }
+  .top-contain{
+    background-color: #ACD5FFFF;
+    height:150rpx;
+    width:90%;
+    margin-top:20rpx;
+    border-radius-top:2px;
 
 
-
-
-
-  onLoad() {
-    this.screenHeight=this.$parent.globalData.deviceInfo.windowHeight;
-    this.$apply()
 
   }
-}
-</script>
-<style lang="css">
-.container{
-  background-color: #4FCE8BFF;
-  justify-content:center !important
-
-}
-.top-contain{
-  background-color: #ACD5FFFF;
-  height:150rpx;
-  width:90%;
-  margin-top:20rpx;
-  border-radius-top:2px;
+  .bottom-contain{
+    background-color: #FFFFFFFF;
+    width:90%;
+    height:800rpx;
 
 
 
-}
-.bottom-contain{
-  background-color: #FFFFFFFF;
-  width:90%;
-  height:800rpx;
-  
+  }
+  .my-top{
+    display: flex
+  }
+  .icon{
+    width: 100rpx;
+    height: 100rpx;
+    transform:translate(50%, 20%);
 
+  }
+  .phone{
+    color: #FFFFFFFF;
+    font-size: 80%
+  }
+  .vip{
+    width:50rpx;
+    height:40rpx;
+    margin-top:2rpx;
 
-}
-.my-top{
-  display: flex
-}
-.icon{
-  width: 100rpx;
-  height: 100rpx;
-  transform:translate(50%, 20%);
+  }
+  .min-text{
+    font-size:60%;
+    margin-top:6rpx;
+    margin-left:30rpx;
 
-}
-.phone{
-  color: #FFFFFFFF;
-  font-size: 80%
-}
-.vip{
-  width:50rpx;
-  height:40rpx;
-  margin-top:2rpx;
-
-}
-.min-text{
-  font-size:60%;
-  margin-top:6rpx;
-  margin-left:30rpx;
-
-}
-.ad{
-  height: 200rpx
-}
-</style>
+  }
+  .ad{
+    height: 200rpx;
+    margin-top: 10rpx
+  }
+  .content{
+    display: flex;
+    justify-content:space-around
+  }
+  .image{
+    width: 80rpx;
+    height: 80rpx
+  }
+  .content-one{
+    justify-content: center
+  }
+  .desc{
+    font-size: 70%
+  }
+  </style>

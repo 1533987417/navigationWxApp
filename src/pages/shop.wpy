@@ -1,0 +1,258 @@
+<template>
+  <view class="bcg" style="height:{{screenHeight}}px">
+    <view class="head-shop">
+      <image class="shop" src="/image/店铺.png"></image>
+      <input class="input" type="text" name=""/>
+      <view><image class="shop-type" src="/image/横竖切换（竖）.png"></image>
+        <view class="head-text">分类</view>
+      </view>
+      
+
+      <image class="shop-end" src="/image/更多_横.png"></image>
+    </view>
+    <view>
+      <van-tabs active="{{ active }}" bind:change="onChange">
+        <van-tab title="综合">
+          <view class="card-contain">
+            <view wx:for="{{showData}}" @tap="toUrl" data-id="{{item.Id}}" wx:for-index="index" wx:for-item="item" wx:key="index">
+              <view class="card-img">
+                <text class="card-sign" wx:if="{{item.sign !== ''}}">{{item.sign}}</text>
+                <image src={{item.SmallImageUrl}} />
+              </view>
+              <view class="card-desc">
+                <text class="card-desc-title">{{item.Title}}</text>
+                <text class="card-desc-info price">￥{{item.SalePrice}}</text><span  style="color:#707070;font-size: 24rpx;float:right;margin-top:10rpx;">月售{{item.count}}</span>
+              </view>
+            </view>
+          </view>
+        </van-tab>
+        <van-tab title="销量"><view class="card-contain">
+          <view wx:for="{{showData}}" @tap="toUrl" data-id="{{item.Id}}" wx:for-index="index" wx:for-item="item" wx:key="index">
+            <view class="card-img">
+              <text class="card-sign" wx:if="{{item.sign !== ''}}">{{item.sign}}</text>
+              <image src={{item.SmallImageUrl}} />
+            </view>
+            <view class="card-desc">
+              <text class="card-desc-title">{{item.Title}}</text>
+              <text class="card-desc-info price">￥{{item.SalePrice}}</text><span  style="color:#707070;font-size: 24rpx;float:right;margin-top:10rpx;">月售{{item.count}}</span>
+            </view>
+          </view>
+        </view></van-tab>
+        <van-tab title="上新"><view class="card-contain">
+          <view wx:for="{{showData}}" @tap="toUrl" data-id="{{item.Id}}" wx:for-index="index" wx:for-item="item" wx:key="index">
+            <view class="card-img">
+              <text class="card-sign" wx:if="{{item.sign !== ''}}">{{item.sign}}</text>
+              <image src={{item.SmallImageUrl}} />
+            </view>
+            <view class="card-desc">
+              <text class="card-desc-title">{{item.Title}}</text>
+              <text class="card-desc-info price">￥{{item.SalePrice}}</text><span  style="color:#707070;font-size: 24rpx;float:right;margin-top:10rpx;">月售{{item.count}}</span>
+            </view>
+          </view>
+        </view></van-tab>
+        <van-tab title="价格"><view class="card-contain">
+          <view wx:for="{{showData}}" @tap="toUrl" data-id="{{item.Id}}" wx:for-index="index" wx:for-item="item" wx:key="index">
+            <view class="card-img">
+              <text class="card-sign" wx:if="{{item.sign !== ''}}">{{item.sign}}</text>
+              <image src={{item.SmallImageUrl}} />
+            </view>
+            <view class="card-desc">
+              <text class="card-desc-title">{{item.Title}}</text>
+              <text class="card-desc-info price">￥{{item.SalePrice}}</text><span  style="color:#707070;font-size: 24rpx;float:right;margin-top:10rpx;">月售{{item.count}}</span>
+            </view>
+          </view>
+        </view></van-tab>
+      </van-tabs>
+    </view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+
+import db from "./../utils/db"
+
+
+export default class Index extends wepy.page {
+  config = {
+    navigationBarTitleText: '北京地铁旗舰店',
+    "usingComponents": {
+      "van-button": "../components/vant/button/index",
+      "van-card": "../components/vant/card/index",
+      "van-rate": "../components/vant/rate/index",
+      "van-toast": "../components/vant/toast/index",
+      "van-tab": "../components/vant/tab/index",
+      "van-tabs": "../components/vant/tabs/index"
+    }
+  }
+
+  components = {
+
+  }
+
+  data = {
+    screenHeight:"",
+    showData:[{SmallImageUrl:"https://ss2.bdstatic.com/8_V1bjqh_Q23odCf/pacific/1830611501.jpg",Title:"淘宝网-购机来【天猫手机馆】品牌直营_超值特惠",count:888,SalePrice:50},{SmallImageUrl:"https://ss2.bdstatic.com/8_V1bjqh_Q23odCf/pacific/1830611501.jpg",Title:"淘宝网-购机来【天猫手机馆】品牌直营_超值特惠",count:888,SalePrice:50},{SmallImageUrl:"https://ss2.bdstatic.com/8_V1bjqh_Q23odCf/pacific/1830611501.jpg",Title:"淘宝网-购机来【天猫手机馆】品牌直营_超值特惠",count:888,SalePrice:50},{SmallImageUrl:"https://ss2.bdstatic.com/8_V1bjqh_Q23odCf/pacific/1830611501.jpg",Title:"淘宝网-购机来【天猫手机馆】品牌直营_超值特惠",count:888,SalePrice:50},{SmallImageUrl:"https://ss2.bdstatic.com/8_V1bjqh_Q23odCf/pacific/1830611501.jpg",Title:"淘宝网-购机来【天猫手机馆】品牌直营_超值特惠",count:888,SalePrice:50},{SmallImageUrl:"https://ss2.bdstatic.com/8_V1bjqh_Q23odCf/pacific/1830611501.jpg",Title:"淘宝网-购机来【天猫手机馆】品牌直营_超值特惠",count:888,SalePrice:50},{SmallImageUrl:"https://ss2.bdstatic.com/8_V1bjqh_Q23odCf/pacific/1830611501.jpg",Title:"淘宝网-购机来【天猫手机馆】品牌直营_超值特惠",count:888,SalePrice:50}]
+  }
+
+  computed = {
+
+  }
+
+  methods = {
+
+  }
+
+  events = {
+    // 'index-emit': (...args) => {
+    //   let $event = args[args.length - 1]
+    //   console.log(`${this.$name} receive ${$event.name} from ${$event.source.$name}`)
+    // }
+  }
+
+  onLoad() {
+    var that = this;
+
+    console.log("进入了index")
+    this.screenHeight=this.$parent.globalData.deviceInfo.windowHeight;
+    this.$apply()
+
+
+  }
+}
+
+</script>
+<style lang="css">
+.bcg{
+  background-color: #F5F5F5FF;
+
+}
+.head-shop{
+  display: flex;
+  background-color: #010101FF
+}
+.shop{
+  width:50rpx;
+  height:50rpx;
+  margin-left:30rpx;
+  margin-top:20rpx;
+  margin-bottom:20rpx;
+
+}
+.shop-end{
+  width:50rpx;
+  height:50rpx;
+  margin-left:10rpx;
+  margin-top:20rpx;
+  margin-bottom:20rpx;
+}
+.shop-type{
+  width:50rpx;
+  height:40rpx;
+  margin-left:10rpx;
+  margin-top:8rpx;
+  margin-bottom:-10rpx;
+
+}
+.input{
+ background-color:#EEEEEEFF;
+ margin-top:20rpx;
+ margin-left:20rpx;
+ border-radius:5rpx;
+ width:70%;
+
+}
+.head-text{
+  color: #EEEEEEFF;
+  font-size:60%;
+  margin-left:10rpx;
+
+}
+.card-contain>view {
+  width: 49%;
+  height: 350rpx;
+  margin-top:8rpx;
+}
+
+.card-img {
+  width: 100%;
+  height: 200rpx;
+  position: relative;
+}
+
+.card-sign {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 5rpx 10rpx;
+  top: 10rpx;
+  right: 10rpx;
+  color: #fff;
+  font-size: 20rpx;
+  border-radius: 25rpx;
+}
+
+.card-contain>view {
+  margin-bottom: 15rpx;
+}
+
+.card-contain>view image {
+  width: 100%;
+  height: 100%;
+  border-top-left-radius: 15rpx;
+  border-top-right-radius: 15rpx;
+}
+
+.card-contain>view:nth-child(2n + 1) {
+  float: left;
+}
+
+.card-contain>view:nth-child(2n) {
+  float: right;
+}
+
+.card-desc {
+  width: 100%;
+  height: 150rpx;
+  box-sizing: border-box;
+  padding: 12rpx;
+  background-color: #fff;
+  border-bottom-left-radius: 15rpx;
+  border-bottom-right-radius: 15rpx;
+}
+
+.card-desc-title {
+  display: -webkit-box;
+  font-size: 26rpx;
+  color: #000000;
+  line-height: 40rpx;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height:80rpx;
+
+}
+
+.card-desc-info {
+  font-size: 24rpx;
+  color: #999999;
+  margin-right: 20rpx;
+
+}
+
+.icon-people {
+  position: relative;
+  //   margin-left: 10rpx;
+  top: 2rpx;
+}
+
+.people-num {
+  margin-left: 10rpx;
+}
+.price{
+  font-weight: bold;
+  color: #FF4500;
+  font-size: 88%;
+
+}
+</style>
