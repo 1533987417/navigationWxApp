@@ -8,14 +8,18 @@ import request from "./utils/request"
 
 export default class extends wepy.app {
   config = {
-    pages: ['pages/route','pages/index',
+    pages: [
     
+    'pages/index',
+    'pages/route',
     'pages/around','pages/my',
     'pages/shop',
-    
-    
+    'pages/city-select',
+    'pages/detail',
     'pages/mytravel',
-    
+    'pages/train-pic',
+    'pages/station'
+    ,
     
     
     ],

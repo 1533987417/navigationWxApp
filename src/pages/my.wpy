@@ -23,9 +23,9 @@
         <image src="/image/}H4)[~0N]B_9$I_7$`KS0FO.png" class="ad" mode="aspectFill"></image>
       </view>
       <view class="content">
-        <view class="content-one" data-url="mytravel">
-          <image class="image" src="/image/webwxgetmsgimg (12).jpg"></image>
-          <view class="desc">地铁路线</view>
+        <view class="content-one" data-url="train-pic">
+          <image data-url="train-pic" class="image" src="/image/webwxgetmsgimg (12).jpg"></image>
+          <view data-url="train-pic" class="desc">地铁路线</view>
         </view>
         <view class="content-one" data-url="">
           <image data-url="" class="image" src="/image/webwxgetmsgimg (11).jpg"></image>

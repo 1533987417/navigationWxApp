@@ -6,7 +6,7 @@
      <view >
        <view class="address1">我的位置</view>
        <image class="to-image" src="/image/webwxgetmsgimg (6).jpg"></image>
-       <view class="address2">{{to}}</view>
+       <view class="address2" @tap="click">选择目的地</view>
 
 
      </view>
@@ -21,7 +21,7 @@
         <view class="middle">
           望京东站
         </view>
-        <image src="/image/箭头.png" style="height:30rpx;width:30rpx;margin-left:33%;"></image>
+        <image @tap="tocity" src="/image/箭头.png" style="height:30rpx;width:30rpx;margin-left:38%;"></image>
       </view>
 
       <view style="margin-left:30rpx;margin-top:50rpx;">
@@ -32,27 +32,60 @@
     <view style="display:flex;justify-content:center">
       <view class="minuate">3分钟到站</view>
       <image class="jian-tou" src="/image/箭头左.png"></image>
-      <view>下次列车</view>
+      <view style="margin-left:10rpx;">下次列车</view>
       <image class="jian-tou" src="/image/箭头右.png"></image>
       <view class="minuate">1分钟到站</view>
 
     </view>
 
     <view >
-      <movable-view direction="vertical">
+  <!--    <swiper >
+
+      <swiper-item>
+        <image class="train" src="/image/火车.png"></image>
+
+      </swiper-item>
+      <swiper-item>
         <image class="train" src="/image/火车.png"></image>
         <image class="train" src="/image/火车.png"></image>
         <image class="train" src="/image/火车.png"></image>
         <image class="train" src="/image/火车.png"></image>
         <image class="train" src="/image/火车.png"></image>
-        <image class="train" src="/image/火车.png"></image> <image class="train" src="/image/火车.png"></image>
-        <image class="train" src="/image/火车.png"></image>
-        <image class="train" src="/image/火车.png"></image> <image class="train" src="/image/火车.png"></image>
         <image class="train" src="/image/火车.png"></image>
         <image class="train" src="/image/火车.png"></image>
-      </movable-view>
-    </view>
+        <image class="train" src="/image/火车.png"></image>
+        <image class="train" src="/image/火车.png"></image>
+      </swiper-item><swiper-item>
+
+
+      </swiper-item><swiper-item>
+
+
+      </swiper-item>
+
+      
+    </swiper> -->
+    <scroll-view class="scroll-view_H" scroll-x >
+
+
+      <image class="train" src="/image/webwxgetmsgimg (24).jpg"></image>
+      <image class="train" src="/image/webwxgetmsgimg (24).jpg"></image> <image class="train" src="/image/webwxgetmsgimg (24).jpg"></image> <image class="train" src="/image/webwxgetmsgimg (24).jpg"></image>
+
+     <!--  <image class="train" src="/image/火车.png"></image>
+      <image class="train" src="/image/火车.png"></image>
+      <image class="train" src="/image/火车绿.png"></image>
+      <image class="train" src="/image/火车红.png"></image>
+      <image class="train" src="/image/火车.png"></image>
+      <image class="train" src="/image/火车红.png"></image>
+      <image class="train" src="/image/火车.png"></image>
+      <image class="train" src="/image/火车.png"></image>
+      <image class="train-head" src="/image/IMG_0288.png"></image> -->
+    </scroll-view>
+    <view style="text-align:center;margin-bottom:100rpx;">客流实况</view>
+
+    <view class="btn" @tap="clickto">站内导航</view>
   </view>
+</view>
 </view>
 </template>
 <script>
@@ -86,7 +119,21 @@ export default class Index extends wepy.page {
   }
 
   methods = {
-
+    click(){
+      wepy.navigateTo({
+        url: "detail"
+      })
+    },
+    clickto(){
+      wepy.navigateTo({
+        url: "station"
+      })
+    },
+    tocity(){
+      wepy.navigateTo({
+        url: "city-select"
+      })
+    }
   }
 
   events = {
@@ -175,7 +222,51 @@ export default class Index extends wepy.page {
 
 }
 .train{
-  width:100rpx;
-  height: 100rpx
+  /*width:100rpx;
+  height: 100rpx;
+  box-sizing: border-box;
+  display: inline-block*/
+  height:190rpx;
+  box-sizing:border-box;
+  display:inline-block;
+
+}
+.train-body{
+  width: 400rpx
+}
+
+.bc_green{
+  background-color: #FF99FFFF
+}
+
+.scroll-view_H{
+ display:flex;
+ flex-direction:row;
+ white-space:nowrap;
+ width:500rpx;
+ text-align:center;
+ margin-left:13%;
+ margin-top:30rpx;
+
+}
+.btn{
+  background-color:#169BD5FF;
+  color:#FFFFFFFF;
+  text-align:center;
+  display:inline;
+  margin-left:36%;
+
+
+
+  border-radius:10rpx;
+  padding:20rpx 30rpx 20rpx 30rpx;
+
+
+}
+.train-head{
+  width:120rpx;
+  height: 120rpx;
+
+
 }
 </style>

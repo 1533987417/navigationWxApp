@@ -39,9 +39,11 @@
       </block>
     </van-cell>
   </view>
+  <van-toast id="van-toast" />
 </template>
 <script>
 import wepy from 'wepy'
+import Toast from '../components/vant/toast/toast';
 
 import db from "./../utils/db"
 
@@ -77,6 +79,7 @@ export default class Index extends wepy.page {
   methods = {
     click(e){
       console.log(e.target.dataset.item)
+      Toast.success('领取成功');
       this.list[e.target.dataset.item].isget=true;
       this.$apply()
     }

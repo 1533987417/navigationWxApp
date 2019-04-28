@@ -1,5 +1,5 @@
 <template>
-  https://www.bjsubway.com/subway/images/subway_map01.jpg<web-view src="https://www.amap.com"></web-view>
+  <web-view src="https://www.bjsubway.com/jpg.html"></web-view>
 </template>
 <script>
 import wepy from 'wepy'

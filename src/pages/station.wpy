@@ -1,0 +1,199 @@
+<template>
+  <view class="container" style="height:{{screenHeight}}px">
+
+   <view class="body">
+
+    <view style="transform:translate(36%, 10%);">
+
+      <view class="middle">
+        望京东站
+      </view>
+      <view wx:if="{{show}}">
+        <image class="icon-temp" src="{{tempdata.url}}"></image>
+        <view class="text">坐标：<span style="color:#000000FF">{{tempdata.local}}</span></view>
+        <view class="text">注意：<span style="color:#000000FF">{{tempdata.note}}</span>
+        </view>
+      </view>      
+      <image wx:if="{{!show}}" mode="aspectFill" class="map" src="/image/111111.png"></image>
+    </view>
+    <view @tap="click">
+      <view class="nav">
+        <view class="item" data-hi="{{datalist[1]}}">
+          <image data-hi="{{datalist[1]}}" class="icon" src="/image/webwxgetmsgimg (16).jpg"></image>
+          <view data-hi="{{datalist[1]}}">充值购票</view>
+        </view>
+        <view class="item" data-hi="{{datalist[4]}}">
+          <image data-hi="{{datalist[4]}}" class="icon" src="/image/webwxgetmsgimg (4).jpg"></image>
+          <view data-hi="{{datalist[4]}}">乘电梯</view>
+        </view>
+        <view class="item" data-hi="{{datalist[3]}}">
+          <image data-hi="{{datalist[3]}}" class="icon" src="/image/webwxgetmsgimg (17).jpg"></image>
+          <view data-hi="{{datalist[3]}}">自助售卖</view>
+        </view>
+
+
+      </view>
+      <view class="nav">
+        <view class="item" data-hi="{{datalist[1]}}">
+          <image data-hi="{{datalist[1]}}" class="icon" src="/image/webwxgetmsgimg (22).jpg"></image>
+          <view data-hi="{{datalist[1]}}">卫生间</view>
+        </view>
+        <view class="item" data-hi="{{datalist[2]}}">
+          <image data-hi="{{datalist[2]}}" class="icon" src="/image/webwxgetmsgimg (18).jpg"></image>
+          <view data-hi="{{datalist[2]}}">AR导航</view>
+        </view>
+        <view class="item">
+          <view class="btn">更多</view>
+        </view>
+
+
+      </view>
+    </view>
+  </view>
+</view>
+<van-toast id="van-toast" />
+</template>
+<script>
+import Toast from '../components/vant/toast/toast';
+import wepy from 'wepy'
+import db from "./../utils/db"
+
+export default class Index extends wepy.page {
+  config = {
+    navigationBarTitleText: '路线规划',
+    "usingComponents": {
+      "van-button": "../components/vant/button/index",
+      "van-card": "../components/vant/card/index",
+      "van-rate": "../components/vant/rate/index",
+      "van-toast": "../components/vant/toast/index"
+    }
+  }
+
+  components = {
+
+  }
+
+  data = {
+    screenHeight:"",
+    to:"望京站",
+    datalist:[
+    {local:"候车区两侧尽头",note:"免费提供纸巾",url:"/image/webwxgetmsgimg (22).jpg"},
+    {local:"A出口、B出口",note:"仅收取5元/10元/50元",url:"/image/webwxgetmsgimg (16).jpg"},
+    {local:"站内定位/找人/失物领取",note:"需要打开蓝牙",url:"/image/webwxgetmsgimg (18).jpg"},
+    {local:"D口扶梯、B出口附近",note:"仅支持微信/支付宝",url:"/image/webwxgetmsgimg (17).jpg"},
+    {local:"站厅—站台/站厅-C出口",note:"老幼病残孕优先乘坐",url:"/image/webwxgetmsgimg (4).jpg"}],
+    tempdata:{local:"",note:"",url:""},
+    show:false
+  }
+
+  computed = {
+
+  }
+
+  methods = {
+    click(e){
+      this.show=true;
+
+      if(e.target.dataset.hi){
+        console.log(e.target.dataset.hi);
+        this.tempdata=e.target.dataset.hi;
+        this.$apply()
+      }else{
+        Toast.fail("更多功能暂未开放")
+      }
+      this.$apply()
+
+    }
+  }
+
+  events = {
+    // 'index-emit': (...args) => {
+    //   let $event = args[args.length - 1]
+    //   console.log(`${this.$name} receive ${$event.name} from ${$event.source.$name}`)
+    // }
+  }
+
+  onLoad() {
+    var that = this;
+
+    console.log("进入了index")
+
+    this.screenHeight=this.$parent.globalData.deviceInfo.windowHeight;
+    this.$apply()
+
+  }
+}
+
+</script>
+<style lang="css">
+.container{
+  background-color: #4FCE8BFF;
+
+}
+.body{
+  background-color:#FFFFFFFF;
+  height:900rpx;
+  width:90%;
+  margin-top:120rpx;
+  border-radius:10rpx;
+
+
+}
+.icon{
+  width:100rpx;
+  height:80rpx;
+  margin-left:5rpx
+}
+.nav{
+ display:flex;
+ justify-content:space-around;
+ margin-top:90rpx
+}
+.item{
+  justify-content: space-around;
+}
+.btn{
+  background-color:#169BD5FF;
+  color:#FFFFFFFF;
+  text-align:center;
+  border-radius:10rpx;
+  padding:5rpx 20rpx 5rpx 20rpx;
+  margin-top:30rpx;
+
+
+}
+.middle{
+  background-color:#FF99FFFF;
+  height:60rpx;
+  width:180rpx;
+  border-radius:10rpx;
+  padding-top:10rpx;
+  text-align:center;
+
+
+
+
+}
+.icon-temp{
+  width: 150rpx;
+  height: 150rpx;
+  width:160rpx;
+  height:120rpx;
+  margin-top:30rpx;
+
+}
+.text{
+  color:#FF0000FF;margin-top:20rpx;margin-bottom:20rpx;
+  margin-left:-20%;
+
+}
+.map{
+  margin-top: 20rpx;
+  width:300px;
+  height:130px;
+  display:inline-block;
+  overflow:hidden;
+  margin-left:-30%;
+
+}
+</style>
