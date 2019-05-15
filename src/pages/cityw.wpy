@@ -31,15 +31,14 @@
 <scroll-view class="fit scroll"
 scroll-y
 scroll-into-view="{{scrollIntoId}}">
-<view id="top" 
-class="city-letter">默认车站：</view>
-<view wx:if="{{locationFail}}" 
-class="city-item">清源路</view>
-<view wx:else 
-class="city-item"
-@tap="onLocationTaped()">
-{{ location ? location : '定位中...' }}
+
+<view id="top" class="city-letter">默认车站：</view>
+
+<view class="city-item" style="display:flex">
+  <view class="">{{to}}</view>
+  <view @tap="click" class="toosos">设为终点</view>
 </view>
+
 <view class="city-letter">热门车站</view>
 <repeat for="{{hotCitys}}" >
   <view class="city-item" @tap="onSelected({{item}})">
@@ -78,9 +77,9 @@ import wepy from 'wepy'
 import citys from './city'
 const hotCode = ['110100', '310000', '440100', '440300', '330100', '320100']
 
-export default class CitySelect extends wepy.page {
+export default class City extends wepy.page {
   config = {
-    navigationBarTitleText: '选择目的地'
+    navigationBarTitleText: '乘车提醒'
   }
   data = {
     citys: [],
@@ -94,7 +93,8 @@ export default class CitySelect extends wepy.page {
     startPageY: 0,
     timer: null,
     showSearch: false,
-    searchResult: []
+    searchResult: [],
+    to:"望京东"
   }
   methods = {
 
@@ -150,12 +150,19 @@ export default class CitySelect extends wepy.page {
     },
     onSelected (item,e) {
       console.log('已选择城市', item, item.name)
-      wx.showToast({
-        title:"已开启到站提醒"
-      })
+      
       this.$parent.globalData.to=item.name;
+      this.to=item.name;
       this.$apply()
-      wx.navigateBack()
+      
+    },
+    click(){
+      console.log("wwww")
+      wx.showToast({
+        title:"到站提醒设置成功",
+
+      })
+      
     },
     onLocationTaped () {
       if (!this.location.trim()) {
@@ -169,6 +176,8 @@ export default class CitySelect extends wepy.page {
   }
 
   async onLoad () {
+    this.to=this.$parent.globalData.to;
+    this.$apply()
     this.citys = this.getLetterCity()
     this.hotCitys = this.getHotCity()
     wx.showLoading({
@@ -350,6 +359,19 @@ export default class CitySelect extends wepy.page {
   line-height: 80px;
   font-size: 50px;
   text-align: center;
+}
+.toosos{
+  background-color:#3367D6FF;
+  border-radius:5px;
+  color:white;
+  padding-right:50rpx;
+  height:50rp;
+  float:right;
+
+  position:absolute;
+  right:40rpx;
+
+
 }
 </style>
 

@@ -14,42 +14,18 @@
         <view class="text">注意：<span style="color:#000000FF">{{tempdata.note}}</span>
         </view>
       </view>      
-      <image wx:if="{{!show}}" mode="aspectFill" @tap="sss" class="map" src="/image/111111.png"></image>
+      <image wx:if="{{!show}}" mode="aspectFill" class="map" src="/image/111111.png"></image>
     </view>
-    <view @tap="click">
-      <view class="nav">
-        <view class="item" data-hi="{{datalist[1]}}">
-          <image data-hi="{{datalist[1]}}" class="icon" src="/image/webwxgetmsgimg (16).jpg"></image>
-          <view data-hi="{{datalist[1]}}">充值购票</view>
-        </view>
-        <view class="item" data-hi="{{datalist[4]}}">
-          <image data-hi="{{datalist[4]}}" class="icon" src="/image/webwxgetmsgimg (4).jpg"></image>
-          <view data-hi="{{datalist[4]}}">乘电梯</view>
-        </view>
-        <view class="item" data-hi="{{datalist[3]}}">
-          <image data-hi="{{datalist[3]}}" class="icon" src="/image/webwxgetmsgimg (17).jpg"></image>
-          <view data-hi="{{datalist[3]}}">自助售卖</view>
-        </view>
-
-
-      </view>
-      <view class="nav">
-        <view class="item" data-hi="{{datalist[0]}}">
-          <image data-hi="{{datalist[0]}}" class="icon" src="/image/webwxgetmsgimg (22).jpg"></image>
-          <view data-hi="{{datalist[0]}}">卫生间</view>
-        </view>
-        <view class="item" data-hi="{{datalist[2]}}">
-          <image data-hi="{{datalist[2]}}" class="icon" src="/image/webwxgetmsgimg (18).jpg"></image>
-          <view data-hi="{{datalist[2]}}">AR导航</view>
-        </view>
-        <view class="item">
-          <view class="btn">更多</view>
-        </view>
-
-
-      </view>
-    </view>
-  </view>
+    <view style="margin-top:110rpx;margin-left:40rpx;">
+     <view>B口</view>
+     <view>金辉大厦</view>
+     <view>C口</view>
+     <view>绿地中心 阿里巴巴 望京soho</view>
+     <view>D口</view>
+     <view>远洋万和公馆 摩托罗拉大厦</view>
+   </view>
+ </view>
+</view>
 </view>
 <van-toast id="van-toast" />
 </template>
@@ -107,15 +83,10 @@ export default class Index extends wepy.page {
     clickitem(){
       this.show=false;
       this.$apply()
-    },
-    sss(){
-     wepy.navigateTo({
-      url: '1111'
-    })
-   }
- }
+    }
+  }
 
- events = {
+  events = {
     // 'index-emit': (...args) => {
     //   let $event = args[args.length - 1]
     //   console.log(`${this.$name} receive ${$event.name} from ${$event.source.$name}`)

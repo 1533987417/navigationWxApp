@@ -39,7 +39,7 @@
           </view>
         </view></van-tab>
         <van-tab title="上新"><view class="card-contain">
-          <view wx:for="{{showData}}" @tap="toUrl" data-id="{{item.Id}}" wx:for-index="index" wx:for-item="item" wx:key="index">
+          <view wx:for="{{showData2}}" @tap="toUrl" data-id="{{item.Id}}" wx:for-index="index" wx:for-item="item" wx:key="index">
             <view class="card-img">
               <text class="card-sign" wx:if="{{item.sign !== ''}}">{{item.sign}}</text>
               <image src={{item.SmallImageUrl}} />
@@ -51,7 +51,7 @@
           </view>
         </view></van-tab>
         <van-tab title="价格"><view class="card-contain">
-          <view wx:for="{{showData}}" @tap="toUrl" data-id="{{item.Id}}" wx:for-index="index" wx:for-item="item" wx:key="index">
+          <view wx:for="{{showData3}}" @tap="toUrl" data-id="{{item.Id}}" wx:for-index="index" wx:for-item="item" wx:key="index">
             <view class="card-img">
               <text class="card-sign" wx:if="{{item.sign !== ''}}">{{item.sign}}</text>
               <image src={{item.SmallImageUrl}} />
@@ -91,7 +91,9 @@ export default class Index extends wepy.page {
 
   data = {
     screenHeight:"",
-    showData:[{SmallImageUrl:"https://ss2.bdstatic.com/8_V1bjqh_Q23odCf/pacific/1830611501.jpg",Title:"淘宝网-购机来【天猫手机馆】品牌直营_超值特惠",count:888,SalePrice:50},{SmallImageUrl:"https://ss2.bdstatic.com/8_V1bjqh_Q23odCf/pacific/1830611501.jpg",Title:"淘宝网-购机来【天猫手机馆】品牌直营_超值特惠",count:888,SalePrice:50},{SmallImageUrl:"https://ss2.bdstatic.com/8_V1bjqh_Q23odCf/pacific/1830611501.jpg",Title:"淘宝网-购机来【天猫手机馆】品牌直营_超值特惠",count:888,SalePrice:50},{SmallImageUrl:"https://ss2.bdstatic.com/8_V1bjqh_Q23odCf/pacific/1830611501.jpg",Title:"淘宝网-购机来【天猫手机馆】品牌直营_超值特惠",count:888,SalePrice:50},{SmallImageUrl:"https://ss2.bdstatic.com/8_V1bjqh_Q23odCf/pacific/1830611501.jpg",Title:"淘宝网-购机来【天猫手机馆】品牌直营_超值特惠",count:888,SalePrice:50},{SmallImageUrl:"https://ss2.bdstatic.com/8_V1bjqh_Q23odCf/pacific/1830611501.jpg",Title:"淘宝网-购机来【天猫手机馆】品牌直营_超值特惠",count:888,SalePrice:50},{SmallImageUrl:"https://ss2.bdstatic.com/8_V1bjqh_Q23odCf/pacific/1830611501.jpg",Title:"淘宝网-购机来【天猫手机馆】品牌直营_超值特惠",count:888,SalePrice:50}]
+    showData:[{SmallImageUrl:"https://ss0.baidu.com/73t1bjeh1BF3odCf/it/u=480731318,3180020955&fm=85&s=65D03A8D40429AED020989930300E08F",Title:"淘宝网-购机来【天猫手机馆】品牌直营_超值特惠",count:888,SalePrice:50},{SmallImageUrl:"https://ss2.bdstatic.com/8_V1bjqh_Q23odCf/pacific/1830611501.jpg",Title:"淘宝网-购机来【天猫手机馆】品牌直营_超值特惠",count:888,SalePrice:50},{SmallImageUrl:"https://ss0.baidu.com/73F1bjeh1BF3odCf/it/u=1417534341,3031057042&fm=85",Title:"淘宝网-购机来【天猫手机馆】品牌直营_超值特惠",count:888,SalePrice:50},{SmallImageUrl:"https://ss2.bdstatic.com/8_V1bjqh_Q23odCf/pacific/1830611501.jpg",Title:"淘宝网-购机来【天猫手机馆】品牌直营_超值特惠",count:888,SalePrice:50},{SmallImageUrl:"https://ss2.bdstatic.com/8_V1bjqh_Q23odCf/pacific/1830611501.jpg",Title:"淘宝网-购机来【天猫手机馆】品牌直营_超值特惠",count:888,SalePrice:50},{SmallImageUrl:"https://ss0.bdstatic.com/-0U0bnSm1A5BphGlnYG/tam-ogel/299c55e31d7f50ae4dc85faa90d6f445_121_121.jpg",Title:"淘宝网-购机来【天猫手机馆】品牌直营_超值特惠",count:888,SalePrice:50},{SmallImageUrl:"https://ss2.bdstatic.com/8_V1bjqh_Q23odCf/pacific/1830611501.jpg",Title:"淘宝网-购机来【天猫手机馆】品牌直营_超值特惠",count:888,SalePrice:50}],
+    showData2:[{SmallImageUrl:"https://ss0.baidu.com/73t1bjeh1BF3odCf/it/u=480731318,3180020955&fm=85&s=65D03A8D40429AED020989930300E08F",Title:"淘宝网-购机来【天猫手机馆】品牌直营_超值特惠",count:888,SalePrice:50},{SmallImageUrl:"https://ss2.bdstatic.com/8_V1bjqh_Q23odCf/pacific/1830611501.jpg",Title:"淘宝网-购机来【天猫手机馆】品牌直营_超值特惠",count:888,SalePrice:50},{SmallImageUrl:"https://ss0.baidu.com/73F1bjeh1BF3odCf/it/u=1417534341,3031057042&fm=85",Title:"淘宝网-购机来【天猫手机馆】品牌直营_超值特惠",count:888,SalePrice:50},{SmallImageUrl:"https://ss2.bdstatic.com/8_V1bjqh_Q23odCf/pacific/1830611501.jpg",Title:"淘宝网-购机来【天猫手机馆】品牌直营_超值特惠",count:888,SalePrice:50},{SmallImageUrl:"https://ss2.bdstatic.com/8_V1bjqh_Q23odCf/pacific/1830611501.jpg",Title:"淘宝网-购机来【天猫手机馆】品牌直营_超值特惠",count:888,SalePrice:50},{SmallImageUrl:"https://ss0.bdstatic.com/-0U0bnSm1A5BphGlnYG/tam-ogel/299c55e31d7f50ae4dc85faa90d6f445_121_121.jpg",Title:"淘宝网-购机来【天猫手机馆】品牌直营_超值特惠",count:888,SalePrice:50},{SmallImageUrl:"https://ss2.bdstatic.com/8_V1bjqh_Q23odCf/pacific/1830611501.jpg",Title:"淘宝网-购机来【天猫手机馆】品牌直营_超值特惠",count:888,SalePrice:50}],
+    showData3:[{SmallImageUrl:"https://ss0.baidu.com/73t1bjeh1BF3odCf/it/u=480731318,3180020955&fm=85&s=65D03A8D40429AED020989930300E08F",Title:"淘宝网-购机来【天猫手机馆】品牌直营_超值特惠",count:888,SalePrice:50},{SmallImageUrl:"https://ss2.bdstatic.com/8_V1bjqh_Q23odCf/pacific/1830611501.jpg",Title:"淘宝网-购机来【天猫手机馆】品牌直营_超值特惠",count:888,SalePrice:50},{SmallImageUrl:"https://ss0.baidu.com/73F1bjeh1BF3odCf/it/u=1417534341,3031057042&fm=85",Title:"淘宝网-购机来【天猫手机馆】品牌直营_超值特惠",count:888,SalePrice:50},{SmallImageUrl:"https://ss2.bdstatic.com/8_V1bjqh_Q23odCf/pacific/1830611501.jpg",Title:"淘宝网-购机来【天猫手机馆】品牌直营_超值特惠",count:888,SalePrice:50},{SmallImageUrl:"https://ss2.bdstatic.com/8_V1bjqh_Q23odCf/pacific/1830611501.jpg",Title:"淘宝网-购机来【天猫手机馆】品牌直营_超值特惠",count:888,SalePrice:50},{SmallImageUrl:"https://ss0.bdstatic.com/-0U0bnSm1A5BphGlnYG/tam-ogel/299c55e31d7f50ae4dc85faa90d6f445_121_121.jpg",Title:"淘宝网-购机来【天猫手机馆】品牌直营_超值特惠",count:888,SalePrice:50},{SmallImageUrl:"https://ss2.bdstatic.com/8_V1bjqh_Q23odCf/pacific/1830611501.jpg",Title:"淘宝网-购机来【天猫手机馆】品牌直营_超值特惠",count:888,SalePrice:50}]
   }
 
   computed = {

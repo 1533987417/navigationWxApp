@@ -11,21 +11,21 @@
 
      </view>
 
-     <view style="display:flex;justify-content:center;margin-top:50rpx">
+     <view @tap="clickitem" style="display:flex;justify-content:center;margin-top:50rpx">
       <view style="margin-right:30rpx;margin-top:50rpx;">
-        <view >崔各庄站</view>
+        <view data-hi="1" style="color:{{color1}}">崔各庄站</view>
         <view class="line"></view>
       </view>
       <view>
         <view style="font-size:70%;text-align:center">0.1km(离我最近)</view>
         <view class="middle">
-          望京东站
+          清源路
         </view>
         <image @tap="tocity" src="/image/箭头.png" style="height:30rpx;width:30rpx;margin-left:38%;"></image>
       </view>
 
       <view style="margin-left:30rpx;margin-top:50rpx;">
-        <view style="color:#FF0000FF">望京站</view>
+        <view  data-hi="2" style="color:{{color2}}">{{to}}</view>
         <view class="line"></view>
       </view>
     </view>
@@ -68,9 +68,10 @@
     <scroll-view class="scroll-view_H" scroll-x >
 
 
-      <image class="train" src="/image/webwxgetmsgimg (24).jpg"></image>
-      <image class="train" src="/image/webwxgetmsgimg (24).jpg"></image> <image class="train" src="/image/webwxgetmsgimg (24).jpg"></image> <image class="train" src="/image/webwxgetmsgimg (24).jpg"></image>
-
+      <image class="train2" src="/image/webwxgetmsgimg (36).jpg"></image>
+      <image class="train" src="/image/webwxgetmsgimg (31).jpg"></image>
+      <image class="train" src="/image/webwxgetmsgimg (32).jpg"></image> <image class="train" src="/image/webwxgetmsgimg (33).jpg"></image> <image class="train" src="/image/webwxgetmsgimg (31).jpg"></image>
+      <image class="train2" src="/image/webwxgetmsgimg (40).jpg"></image>
      <!--  <image class="train" src="/image/火车.png"></image>
       <image class="train" src="/image/火车.png"></image>
       <image class="train" src="/image/火车绿.png"></image>
@@ -81,7 +82,7 @@
       <image class="train" src="/image/火车.png"></image>
       <image class="train-head" src="/image/IMG_0288.png"></image> -->
     </scroll-view>
-    <view style="text-align:center;margin-bottom:100rpx;">客流实况</view>
+    <view style="text-align:center;margin-bottom:55rpx;">客流实况</view>
 
     <view class="btn" @tap="clickto">站内导航</view>
   </view>
@@ -111,7 +112,10 @@ export default class Index extends wepy.page {
 
   data = {
     screenHeight:"",
-    to:"望京站"
+    to:"望京站",
+    color1:"",
+    color2:""
+
   }
 
   computed = {
@@ -133,10 +137,20 @@ export default class Index extends wepy.page {
       wepy.navigateTo({
         url: "city-select"
       })
+    },
+    clickitem(e){
+      console.log(e.target.dataset.hi)
+      if(e.target.dataset.hi=="1"){
+       this.color1= "#FF0000FF"
+       this.color2=""
+     }else if(e.target.dataset.hi=="2"){
+      this.color2= "#FF0000FF"
+      this.color1=""
     }
   }
+}
 
-  events = {
+events = {
     // 'index-emit': (...args) => {
     //   let $event = args[args.length - 1]
     //   console.log(`${this.$name} receive ${$event.name} from ${$event.source.$name}`)
@@ -146,11 +160,21 @@ export default class Index extends wepy.page {
   onLoad() {
     var that = this;
 
-    console.log("进入了index")
+    console.log(that.$parent.globalData.to)
 
-    this.screenHeight=this.$parent.globalData.deviceInfo.windowHeight;
-    this.$apply()
+    that.screenHeight=that.$parent.globalData.deviceInfo.windowHeight;
+    that.to=that.$parent.globalData.to;
+    that.$apply()
 
+  }
+  onShow(){
+    var that = this;
+
+    console.log(that.$parent.globalData.to)
+
+    that.screenHeight=that.$parent.globalData.deviceInfo.windowHeight;
+    that.to=that.$parent.globalData.to;
+    that.$apply()
   }
 }
 
@@ -161,7 +185,7 @@ export default class Index extends wepy.page {
 
 }
 .body{
-  background-color:#FFFFFFFF;
+  background-color:#F6F6F6FF;
   height:900rpx;
   width:90%;
   margin-top:120rpx;
@@ -189,7 +213,7 @@ export default class Index extends wepy.page {
   height:80rpx;
   float:center;
   justify-content:center;
-  margin-left:15%;
+  margin-left:13%;
   margin-top:35rpx;
 
 
@@ -226,10 +250,19 @@ export default class Index extends wepy.page {
   height: 100rpx;
   box-sizing: border-box;
   display: inline-block*/
-  height:190rpx;
+  height:320rpx;
   box-sizing:border-box;
   display:inline-block;
+  margin-top:-60rpx;
 
+
+}
+.train2{
+  height:325rpx;
+  box-sizing:border-box;
+  display:inline-block;
+  margin-top:-60rpx;
+  width:200rpx;
 }
 .train-body{
   width: 400rpx
@@ -246,7 +279,7 @@ export default class Index extends wepy.page {
  width:500rpx;
  text-align:center;
  margin-left:13%;
- margin-top:30rpx;
+
 
 }
 .btn{

@@ -27,9 +27,9 @@
           <image data-url="train-pic" class="image" src="/image/webwxgetmsgimg (12).jpg"></image>
           <view data-url="train-pic" class="desc">地铁路线</view>
         </view>
-        <view class="content-one" data-url="">
-          <image data-url="" class="image" src="/image/webwxgetmsgimg (11).jpg"></image>
-          <view data-url="" class="desc">到站提醒</view>
+        <view class="content-one" data-url="cityw">
+          <image data-url="cityw" class="image" src="/image/webwxgetmsgimg (11).jpg"></image>
+          <view data-url="cityw" class="desc">到站提醒</view>
         </view>
       </view>
 
@@ -94,90 +94,100 @@ export default class Index extends wepy.page {
       console.log(e);
       if(e.target.dataset.url){
         var url=e.target.dataset.url;
-        wepy.navigateTo({
-          url: url
-        })}else{
-          Toast.fail('该功能暂未开通');
+        if(url=="1"){
+          Toast.fail('请到路线页面设置');
+        }else{
+          wepy.navigateTo({
+            url: url
+          })
         }
+        
+      }else{
+        Toast.fail('该功能暂未开通');
       }
     }
-
-
-
-
-
-    onLoad() {
-      this.screenHeight=this.$parent.globalData.deviceInfo.windowHeight;
-      this.$apply()
-
-    }
   }
-  </script>
-  <style lang="css">
-  .container{
-    background-color: #4FCE8BFF;
-    justify-content:center !important
+
+
+
+
+
+  onLoad() {
+    this.screenHeight=this.$parent.globalData.deviceInfo.windowHeight;
+    this.$apply()
 
   }
-  .top-contain{
-    background-color: #ACD5FFFF;
-    height:150rpx;
-    width:90%;
-    margin-top:20rpx;
-    border-radius-top:2px;
+  onShow(e){
+    console.log(e)
+    
+  }
+}
+</script>
+<style lang="css">
+.container{
+  background-color: #4FCE8BFF;
+  justify-content:center !important
+
+}
+.top-contain{
+  background-color: #ACD5FFFF;
+  height:150rpx;
+  width:90%;
+  margin-top:20rpx;
+  border-radius-top:2px;
 
 
 
-  }
-  .bottom-contain{
-    background-color: #FFFFFFFF;
-    width:90%;
-    height:800rpx;
+}
+.bottom-contain{
+  background-color: #FFFFFFFF;
+  width:90%;
+  height:800rpx;
 
 
 
-  }
-  .my-top{
-    display: flex
-  }
-  .icon{
-    width: 100rpx;
-    height: 100rpx;
-    transform:translate(50%, 20%);
+}
+.my-top{
+  display: flex
+}
+.icon{
+  width: 100rpx;
+  height: 100rpx;
+  transform:translate(50%, 20%);
 
-  }
-  .phone{
-    color: #FFFFFFFF;
-    font-size: 80%
-  }
-  .vip{
-    width:50rpx;
-    height:40rpx;
-    margin-top:2rpx;
+}
+.phone{
+  color: #FFFFFFFF;
+  font-size: 80%
+}
+.vip{
+  width:50rpx;
+  height:40rpx;
+  margin-top:2rpx;
 
-  }
-  .min-text{
-    font-size:60%;
-    margin-top:6rpx;
-    margin-left:30rpx;
+}
+.min-text{
+  font-size:60%;
+  margin-top:6rpx;
+  margin-left:30rpx;
 
-  }
-  .ad{
-    height: 200rpx;
-    margin-top: 10rpx
-  }
-  .content{
-    display: flex;
-    justify-content:space-around
-  }
-  .image{
-    width: 80rpx;
-    height: 80rpx
-  }
-  .content-one{
-    justify-content: center
-  }
-  .desc{
-    font-size: 70%
-  }
-  </style>
+}
+.ad{
+  height: 200rpx;
+  margin-top: 10rpx
+}
+.content{
+  display: flex;
+  justify-content:space-around
+}
+.image{
+  width: 80rpx;
+  height: 80rpx
+}
+.content-one{
+  justify-content: center
+}
+.desc{
+  font-size: 70%
+}
+</style>

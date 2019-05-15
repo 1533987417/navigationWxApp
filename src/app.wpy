@@ -8,9 +8,9 @@ import request from "./utils/request"
 
 export default class extends wepy.app {
   config = {
-    pages: [
-    
+    pages: [ 
     'pages/index',
+    'pages/cityw',
     'pages/route',
     'pages/around','pages/my',
     'pages/shop',
@@ -19,8 +19,8 @@ export default class extends wepy.app {
     'pages/mytravel',
     'pages/train-pic',
     'pages/station'
-    ,
-    
+    ,'pages/1111',
+
     
     ],
     window: {
@@ -85,7 +85,8 @@ export default class extends wepy.app {
 
       globalData = {
         userInfo: {},
-        deviceInfo: {}
+        deviceInfo: {},
+        to:"望京东"
       }
 
       constructor() {
